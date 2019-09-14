@@ -30,7 +30,7 @@ class LVQ():
                 self.ref_vector[idx] = self.ref_vector[idx] - lr*(X[i] - self.ref_vector[idx])
 
 
-    def fit(self,X,y,epoch,lr):
+    def fit(self,X,y,epoch,lr,eval_set):
         # X, y is Np Array
         for i in range(self.n_class):
             idx = np.where(y==i)[0][0]
@@ -40,8 +40,8 @@ class LVQ():
 
         for e in range(epoch):
             self.__train(X,y,lr)
-            y_pr = self.predict(X)
-            acc = ((y_pr == y).sum()) / y.shape[0]
+            y_pr = self.predict(eval_set[0])
+            acc = ((y_pr == eval_set[1]).sum()) / y.shape[0]
             print("Epoch: {} Lr: {:.4f} Acc: {:.4f}".format(e+1,lr,acc))
             #lr = lr *(1.0-(e/epoch))
             #print(self.ref_vector)

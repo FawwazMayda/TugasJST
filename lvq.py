@@ -41,7 +41,7 @@ class LVQ():
         for e in range(epoch):
             self.__train(X,y,lr)
             y_pr = self.predict(eval_set[0])
-            acc = ((y_pr == eval_set[1]).sum()) / y.shape[0]
+            acc = ((y_pr == eval_set[1]).sum()) / eval_set[1].shape[0]
             print("Epoch: {} Lr: {:.4f} Acc: {:.4f}".format(e+1,lr,acc))
             #lr = lr *(1.0-(e/epoch))
             #print(self.ref_vector)

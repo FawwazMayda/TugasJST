@@ -52,16 +52,19 @@ class Neural():
             layer.weights += layer.delta * input_to_use.T * learn_rate
            
 
-    def fit(self,X,y,epochs,learn_rate):
+    def fit(self,X,y,epochs,learn_rate,eval_set):
+        #encode the Y
         y_encode=self.__encode(y)
         mses = 0
+        # y_test is un-encoded
+        X_test,y_test = eval_set
         for e in range(epochs):
             for i in range(len(X)):
                 self.__backward(X[i],y_encode[i],learn_rate)
             #print(self.layers[0].weights)
-            y_pr = self.__forward(X)
-            mse = np.mean(np.square(y_encode-y_pr))
-            y_pr_class = self.y_encode(y_pr)
-            acc = (y==y_pr_class).sum() /len(y)
-            print("MSE:{} ACC:{}".format(mse,acc))
-            #print("Epoch:{} Acc:{}".format(e,acc))
+            #y_pr = self.__forward(X_test)
+            #mse = np.mean(np.square(y_encode-y_pr))
+            y_pr_class = self.predict(X_test)
+            acc = (y_test==y_pr_class).sum() /len(y_test)
+            #print("MSE:{} ACC:{}".format(mse,acc))
+            print("Epoch:{} Acc:{}".format(e,acc))

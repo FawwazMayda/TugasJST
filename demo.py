@@ -22,5 +22,5 @@ angka = [[4,5,6,7],[10,20,30,40],[12,76,34,23],[5,5,5,8]]
 angka = np.array(angka)
 print(angka.shape)
 print(nn.predict(angka))
-nn.fit(X_train,y_train,epochs=1000,learn_rate=0.01)
+nn.fit(X_train,y_train,epochs=90,learn_rate=0.1,eval_set=(X_test,y_test))
 #nn.fit(X_train,y_train,epochs=2,learn_rate=100,eval_set=(X_test,y_test))
